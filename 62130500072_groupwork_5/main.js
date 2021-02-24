@@ -1,4 +1,4 @@
-const app = {
+const app = Vue.createApp({
     data() {
         return {
             tasks: [{ info: 'In the afternoon', Image: './images/cityInAfterNoon.jpg', done: false },
@@ -17,6 +17,7 @@ const app = {
     methods: {
         toggleDone(index) {
             this.tasks[index].done = !this.tasks[index].done;
+            console.log(index)
         },
 
         toggleicon:
@@ -38,7 +39,7 @@ const app = {
 
     },
     computed: {
-        countUndone() {
+        countUndone : function() {
             return this.tasks.filter(t => !t.done).length
         },
         inputMassage() {
@@ -50,6 +51,4 @@ const app = {
             }
         }
     }
-}
-
-Vue.createApp(app).mount('#app')
+})

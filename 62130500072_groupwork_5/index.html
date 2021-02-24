@@ -26,7 +26,9 @@
 
         <div v-show="invisible" class=" flex flex-col justify-center w-2/6 mx-auto my-10">
             
-            <h1 class="text-xl">Photo Gallery ( {{ countUndone }} )</h1>
+            <!-- <h1 class="text-xl">Photo Gallery ( {{ countUndone }} )</h1> -->
+            <count-picture :tasks='countUndone'></count-picture>
+            
             <div id="search_bar">
                 <div id="input_text" v-show="search.toggle">
                     <input type="text" v-model="index" @keyup.enter="inputMassage" placeholder="Enter a new task ..."
@@ -36,7 +38,8 @@
                 <button @click="toggleicon" v-show="search.cancel" class="material-icons transition duration-150 transform hover:scale-125 motion-reduce:transform-none">search</button>
                 <button @click="toggleicon" v-show="search.cancel == false" class="transition duration-150 transform hover:scale-125 motion-reduce:transform-none">cancel</button>
             </div>
-                <div v-for="(task,index) in tasks" >
+            <picture-set :photoset='tasks' @fav="toggleDone" @cancelfav="toggleDone"></picture-set>
+                <!-- <div v-for="(task,index) in tasks" >
 
                     <span >{{task.info}}</span>
 
@@ -44,18 +47,24 @@
                         <span v-show="task.done == false" class="material-icons cursor-pointer transition duration-150 transform hover:scale-125 motion-reduce:transform-none" v-on:click="toggleDone(index)">favorite_border</span>
                         <span v-show="task.done == true" class="material-icons cursor-pointer"v-on:click="toggleDone(index)">favorite</span>
 
-                </div>
+                </div> -->
 
         </div>
 
-        <div class="bg-black w-full h-screen flex justify-center" v-show="!invisible">
+        <picture-view :view='togglePicture'></picture-view>
+        <!-- <div class="bg-black w-full h-screen flex justify-center" v-show="!invisible">
             <img v-bind:src="pathImage" v-on:click="quitCanvas" class="cursor-pointer">
-        </div>
+        </div> -->
     </div>
 
+    <my-picture></my-picture>
 
     <!-- my main.js -->
     <script src="./main.js"></script>
+    <script src="./components/PhotoItem.js"></script>
+    <script src="./components/PhotoSearch.js"></script>
+    <script src="./components/PhotoView.js"></script>
+    <script>const mountedApp = app.mount('#app')</script>
 </body>
 
 </html>
