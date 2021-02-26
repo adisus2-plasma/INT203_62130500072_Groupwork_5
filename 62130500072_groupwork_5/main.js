@@ -7,9 +7,7 @@ const app = Vue.createApp({
             ],
             search: { toggle: false, cancel: true },
             index: "",
-            backup: [{ info: 'In the afternoon', Image: './images/cityInAfterNoon.jpg', done: false },
-            { info: 'Empire state and the sunset', Image: './images/cityInSunset.jpg', done: false },
-            { info: 'Street in small town', Image: './images/cityInNight.jpg', done: false }],
+            
             invisible: true,
             pathImage: ""
         }
@@ -20,8 +18,7 @@ const app = Vue.createApp({
             console.log(index)
         },
 
-        toggleicon:
-            function () {
+        toggleicon() {
                 this.search.toggle = !this.search.toggle
                 this.search.cancel = !this.search.cancel
                 console.log(this.search.toggle);
@@ -29,12 +26,18 @@ const app = Vue.createApp({
             },
 
         togglePicture(position){
+            
             this.pathImage = position
-            this.invisible = false
+            this.invisible = !this.invisible
+            console.log(this.pathImage)
         },
 
         quitCanvas(){
             this.invisible = true
+        },
+
+        changeNum(i){
+            this.index = i
         }
 
     },
@@ -43,12 +46,15 @@ const app = Vue.createApp({
             return this.tasks.filter(t => !t.done).length
         },
         inputMassage() {
-            this.tasks = this.backup
+            
             if (this.index) {
-                return this.tasks = this.tasks.filter(c => {
+                return this.tasks.filter(c => {
                     return c.info.toLowerCase().includes(this.index.toLowerCase())
                 });
+            }else{
+                return this.tasks
             }
         }
-    }
+        }
+    
 })
